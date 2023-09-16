@@ -19,7 +19,7 @@
             {{-- 地図挿入 --}}
             <div id="mapid" style="height: 400px; width: 600px"></div>
             <script>
-                var mymap = L.map('mapid').setView([38.987, 141.113], 13);
+                var mymap = L.map('mapid').setView([{{ $post->lat }}, {{ $post->lng }}], 17);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 maxZoom: 18,
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
