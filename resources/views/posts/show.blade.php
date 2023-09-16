@@ -30,11 +30,8 @@
             </script>
 
 
-
-
-
-            <img src="{{ $post->photo_1 }}" alt="" class="mb-4">
-            <img src="{{ $post->photo_2 }}" alt="" class="mb-4">
+            <img src="{{ $post->image_url }}" alt="" class="mb-4">
+            <img src="{{ $post->image2_url }}" alt="" class="mb-4">
             <h3>投稿者メモ</h3>
             <p class="text-gray-700 text-base">{!! nl2br(e($post->memo)) !!}</p>
 
