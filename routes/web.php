@@ -28,11 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts', PostController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
-    ->middleware('auth');
+// Route::resource('posts', PostController::class)
+//     ->only(['edit', 'show', 'update', 'destroy'])
+//     ->middleware('auth');//ログインしないといじれない
+
+// Route::resource('posts', PostController::class)
+//     ->only(['store','create']);//誰でもいじれる
 
 Route::resource('posts', PostController::class)
-    ->only(['show', 'index']);
+    ->only(['create', 'store']);
+
+Route::resource('posts', PostController::class)
+    ->except(['create', 'store'])
+    ->middleware('auth');
 
 require __DIR__ . '/auth.php';
