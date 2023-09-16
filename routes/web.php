@@ -29,10 +29,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('posts', PostController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->only(['store', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 
 Route::resource('posts', PostController::class)
-    ->only(['show', 'index']);
+    ->only(['show', 'index', 'create']);
 
 require __DIR__ . '/auth.php';

@@ -13,13 +13,22 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('body');
-            $table->string('image');
-            $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->timestamp('discovery_day');
+            $table->double('lat');
+            $table->double('lng');
+            $table->string('category');
+            $table->string('photo_1');
+            $table->string('photo_2');
+            $table->text('memo');
+            $table->string('status');
+            $table->text('admin_comment');
+            // $table->string('title');
+            // $table->text('body');
+            // $table->string('image');
+            // $table->foreignId('user_id')
+            //     ->constrained()
+            //     ->cascadeOnUpdate()
+            //     ->cascadeOnDelete();
             $table->timestamps();
         });
     }
