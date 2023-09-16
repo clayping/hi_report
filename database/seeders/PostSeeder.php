@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
             'lng' => '141.1181',
             'category' => '道路陥没',
             'photo_1' => 'person.jpg',
-            'photo_2' => 'sky1.jpg',
+            'photo_2' => 'sky.jpg',
             'memo' => '道路に穴が開いている。',
             'status' => '',
             'admin_comment' => '',

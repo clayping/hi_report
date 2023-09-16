@@ -22,13 +22,6 @@ return new class extends Migration
             $table->text('memo');
             $table->string('status');
             $table->text('admin_comment');
-            // $table->string('title');
-            // $table->text('body');
-            // $table->string('image');
-            // $table->foreignId('user_id')
-            //     ->constrained()
-            //     ->cascadeOnUpdate()
-            //     ->cascadeOnDelete();
             $table->timestamps();
         });
     }
