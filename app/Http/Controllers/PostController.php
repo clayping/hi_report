@@ -44,20 +44,21 @@ class PostController extends Controller
         $post = new Post($request->all());
         $post->lat = $request->lat;
         $post->lng=$request->lng;
-        $post->photo_1=$request->photo_1;
-        $post->photo_2=$request->photo_2;
         $post->category=$request->category;
         $post->memo=$request->memo;
-        $file = $request->file('image');
+        $file = $request->file('photo_1');
+        $file = $request->file('photo_2');
         $post->image = self::createFileName($file);
 
         if($request->hasFile('photo_1')) {
-            $photoPath1 = $request->file('photo_1')->store('photos');
+            $file1 = $request->file('photo_1');
+            $photoPath1=$file1->store('photos');
             $post->photo_1=$photoPath1;
         }
 
         if($request->hasFile('photo_2')) {
-            $photoPath2=$request->file('photo_2')->store('photos');
+            $file2=$request->file('photo_2');
+            $photoPath2=$file2->store('photos');
             $post->photo_2=$photoPath2;
         }
 
@@ -80,8 +81,8 @@ class PostController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-
-        return redirect('/posts')->with('success', '新しい発見が登録されました!');
+        return redirect()->route('posts.show', $post);
+        // return redirect('/posts')->with('success', '新しい発見が登録されました!');
     }
 
     /**
