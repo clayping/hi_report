@@ -9,7 +9,7 @@
 
         <x-validation-errors :errors="$errors" />
         <article class="mb-2">
-            <h3 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl md:text-4xl break-words">登録No. {{ $post->id }}</h3>
+            <h3 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl break-words">登録No. {{ $post->id }}</h3>
 
             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
                 <span class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->discovery_day ? 'NEW' : '' }}</span>
@@ -19,7 +19,7 @@
             {{-- 地図挿入 --}}
             <div id="mapid" style="height: 400px; width: 600px"></div>
             <script>
-                var mymap = L.map('mapid').setView([38.987, 141.113], 13);
+                var mymap = L.map('mapid').setView([{{ $post->lat }}, {{ $post->lng }}], 17);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 maxZoom: 18,
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
@@ -28,19 +28,18 @@
                 var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap);
                 
             </script>
+            </div>
 
 
-
-
-
-            <img src="{{ $post->photo_1 }}" alt="" class="mb-4">
-            <img src="{{ $post->photo_2 }}" alt="" class="mb-4">
+            <img src="{{ $post->image_url }}" alt="" class="mb-4">
+            <img src="{{ $post->image2_url }}" alt="" class="mb-4">
+            <br>
             <h3>投稿者メモ</h3>
             <p class="text-gray-700 text-base">{!! nl2br(e($post->memo)) !!}</p>
-
+            <br>
             <h3>管理者コメント</h3>
             <p class="text-gray-700 text-base">{!! nl2br(e($post->admin_comment)) !!}</p>
-
+            <br>
             <h3>ステータス</h3>
             <p>{{ $post->status }}</p>
 
@@ -48,16 +47,15 @@
         </article>
 
         <div class="flex flex-row text-center my-4">
-            @can('update', $post)
-                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2">更新</a>
-            @endcan
-            @can('delete', $post)
-                <form action="{{ route('posts.destroy', $post) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20">
-                </form>
-            @endcan
+            <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2">編集</a>
+            <form action="{{ route('posts.destroy', $post) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20">
+            </form>
+            <a href="/posts">
+                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-30">一覧に戻る</button>
+            </a>
         </div>
     </div>
 </x-app-layout>
