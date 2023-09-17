@@ -9,14 +9,13 @@
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
         }).addTo(mymap);
-        var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap);
+        
+        @foreach ($posts as $post)
+            var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap);
+        @endforeach
         
     </script>
     </div>
-
-
-
-
 
 
 

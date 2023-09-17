@@ -207,5 +207,14 @@ class PostController extends Controller
         Mail::to($user)->send(new PostCreated($newPost));
 
         return redirect('/posts')->with('success', '投稿が作成されました。');
-}
+    }
+
+    public function markers()
+    {
+        $posts = Post::all();
+
+        return view('posts.markers', ['posts'=> $posts]);
+    }
+
+
 }

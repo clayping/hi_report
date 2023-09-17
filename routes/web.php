@@ -42,4 +42,8 @@ Route::resource('posts', PostController::class)
     ->except(['create', 'store'])
     ->middleware('auth');
 
+Route::get('/markers', [PostController::class, 'markers'])
+    ->name('markers');
+
+
 require __DIR__ . '/auth.php';
