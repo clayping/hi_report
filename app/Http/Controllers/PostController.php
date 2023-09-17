@@ -41,36 +41,33 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = new Post($request->all());
+        $post = new Post();
+        $post->discovery_day=$request->discovery_day;
         $post->lat = $request->lat;
         $post->lng=$request->lng;
         $post->category=$request->category;
         $post->memo=$request->memo;
-        $file = $request->file('photo_1');
-        $file = $request->file('photo_2');
-        $post->image = self::createFileName($file);
+        $post->status=$request->status;
+        $post->admin_comment=$request->admin_comment;
 
-        if($request->hasFile('photo_1')) {
-            $file1 = $request->file('photo_1');
-            $photoPath1=$file1->store('photos');
-            $post->photo_1=$photoPath1;
-        }
+        $file1 = $request->file('photo_1');
+        $post->photo_1 = date('YmdHis') . '_' . $file1->getClientOriginalName();
 
-        if($request->hasFile('photo_2')) {
-            $file2=$request->file('photo_2');
-            $photoPath2=$file2->store('photos');
-            $post->photo_2=$photoPath2;
-        }
+        $file2 = $request->file('photo_2');
+        $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
-        // トランザクション開始
+        // // トランザクション開始
         DB::beginTransaction();
         try {
             // 登録
             $post->save();
 
             // 画像アップロード
-            if (!Storage::putFileAs('images/posts', $file, $post->image)) {
+            if (!Storage::putFileAs('images/posts', $file1, $post->photo_1)) {
                 // 例外を投げてロールバックさせる
+                throw new \Exception('画像ファイルの保存に失敗しました。');
+            }
+            if (!Storage::putFileAs('images/posts', $file2, $post->photo_2)) {
                 throw new \Exception('画像ファイルの保存に失敗しました。');
             }
 
@@ -82,7 +79,7 @@ class PostController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
         return redirect()->route('posts.show', $post);
-        // return redirect('/posts')->with('success', '新しい発見が登録されました!');
+        return redirect('/posts')->with('success', '新しい発見が登録されました!');
     }
 
     /**

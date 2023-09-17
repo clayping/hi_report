@@ -3,10 +3,11 @@
     <div class="container max-w-7xl mx-auto px-4 md:px-12 pb-3 mt-3">
         <h2 class="font-bold text-2xl">投稿する</h2>
         {{-- <form method="POST" action="/discoveries" enctype="multipart/form-data"> --}}
-        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="/posts" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="discovery_date">発見日</label>
+                <label for="discovery_day">発見日</label>
+                <input type="hidden" name="discovery_day" value="{{ $today }}">
                 {{ $today }}
             </div>
             <div class="form-group">
@@ -34,6 +35,8 @@
                     });
                 });
             </script>
+            <input type="text"name='lat'>
+            <input type="text" name="lng" id="">
             <div class="form-group">
                 <label for="photo_1">写真(近景)</label>
                 <input type="file" name="photo_1" class="form-control-file">
@@ -58,10 +61,14 @@
                 <label class="block text-gray-700 text-sm mb-2" for="memo">
                     内容
                 </label>
-                <textarea name="body" rows="10"
+                <textarea name="memo" rows="10"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
                     required>{{ old('memo') }}</textarea>
             </div>
+
+            <input type="text" name="status">
+            <input type="text" name="admin_comment">
+
             <input type="submit" value="登録"
                 class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         </form>
