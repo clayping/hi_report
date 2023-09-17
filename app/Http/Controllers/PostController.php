@@ -7,6 +7,12 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+// メール機能のための追加
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PostCreated;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\PostCreatedNotification;
+
 
 class PostController extends Controller
 {
@@ -25,6 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
+
         return view('posts.create');
     }
 
@@ -59,9 +66,6 @@ class PostController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
-        return redirect()
-            ->route('posts.show', $post)
-            ->with('notice', '記事を登録しました');
     }
 
     /**
@@ -172,4 +176,20 @@ class PostController extends Controller
         return date('YmdHis') . '_' . $file->getClientOriginalName();
     }
 
+    public function createPost(StorePostRequest $request)
+    {
+        // 投稿を作成するロジックを追加
+
+        // メールを送信
+        $user = Auth::user(); // 例えば、ログインユーザーを取得
+
+        $newPost = new Post();
+        $newPost->title = '新しい投稿のタイトル';
+        $newPost->content = '新しい投稿の内容';
+        $newPost->save();
+        $newPost = Post::find($newPost->id);
+        Mail::to($user)->send(new PostCreated($newPost));
+
+        return redirect('/posts')->with('success', '投稿が作成されました。');
+}
 }
