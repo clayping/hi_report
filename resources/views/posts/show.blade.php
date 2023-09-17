@@ -9,7 +9,7 @@
 
         <x-validation-errors :errors="$errors" />
         <article class="mb-2">
-            <h3 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl break-words">登録No. {{ $post->id }}</h3>
+            <h3 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-2xl break-words">登録No. {{ $post->id }}</h3>
 
             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
                 <span class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->discovery_day ? 'NEW' : '' }}</span>
@@ -30,9 +30,10 @@
             </script>
             </div>
 
-
-            <img src="{{ $post->image_url }}" alt="" class="mb-4">
-            <img src="{{ $post->image2_url }}" alt="" class="mb-4">
+            <div class="flex">
+            <img src="{{ $post->image_url }}" alt="" class="mb-4 px-4" width="400">
+            <img src="{{ $post->image2_url }}" alt="" class="mb-4 px-4" width="400">
+            </div>
             <br>
             <h3>投稿者メモ</h3>
             <p class="text-gray-700 text-base">{!! nl2br(e($post->memo)) !!}</p>

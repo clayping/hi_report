@@ -154,7 +154,7 @@ class PostController extends Controller
         }
 
         return redirect()->route('posts.show', $post)
-            ->with('notice', '記事を更新しました');
+            ->with('notice', '登録情報を更新しました');
     }
 
     /**
