@@ -22,8 +22,7 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         $rule = [
-            'title' => 'required|string|max:50',
-            'body' => 'required|string|max:2000',
+            'admin_comment' => 'required|string|max:2000',
         ];
 
         if ($this->file('image')) {

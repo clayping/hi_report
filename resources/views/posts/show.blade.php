@@ -28,6 +28,7 @@
                 var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap);
                 
             </script>
+            </div>
 
 
             <img src="{{ $post->image_url }}" alt="" class="mb-4">
@@ -45,16 +46,12 @@
         </article>
 
         <div class="flex flex-row text-center my-4">
-            @can('update', $post)
                 <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2">更新</a>
-            @endcan
-            @can('delete', $post)
                 <form action="{{ route('posts.destroy', $post) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20">
                 </form>
-            @endcan
         </div>
     </div>
 </x-app-layout>

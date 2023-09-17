@@ -91,10 +91,10 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if ($request->user()->cannot('update', $post)) {
-            return redirect()->route('posts.show', $post)
-                ->withErrors('自分の記事以外は更新できません');
-        }
+        // if ($request->user()->cannot('update', $post)) {
+        //     return redirect()->route('posts.show', $post)
+        //         ->withErrors('自分の記事以外は更新できません');
+        // }
 
         $file = $request->file('image');
         if ($file) {
