@@ -55,29 +55,17 @@
                     <input type="radio" name="status" value="対応中" {{ $post->status === "対応中" ? 'checked' : '' }}> 対応中
                     <input type="radio" name="status" value="対応完了" {{ $post->status === "対応完了" ? 'checked' : '' }}> 対応完了
                 </p>
-            </div><br>
+            </div>
+
 
             <div class="flex flex-row text-center my-4">
-            <input type="submit" value="更新"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2">
+                <input type="submit" value="更新"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline w-20 mr-2">
+                <a href="/posts">
+                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-30">一覧に戻る</button>
+                </a>
             </div>
         </form>
-
-        <div class="flex flex-row text-center my-4">
-                <form action="{{ route('posts.destroy', $post) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20">
-                </form>
-        </div>
-
-        <div>
-            <a href="/posts">
-                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20">一覧に戻る</button>
-            </a>
-        
-        
-        </div>
 
     </div>
 </x-app-layout>
