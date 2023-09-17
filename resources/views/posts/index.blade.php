@@ -42,3 +42,15 @@
         {{ $posts->links() }}
     </div>
 </x-app-layout>
+
+                            <span class="text-red-400 font-bold">
+                                {{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->created_at ? 'NEW' : '' }}
+                            </span>
+                            {{ $post->created_at }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</x-app-layout>

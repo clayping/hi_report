@@ -13,6 +13,7 @@ use App\Mail\PostCreated;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\PostCreatedNotification;
 
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -31,8 +32,8 @@ class PostController extends Controller
      */
     public function create()
     {
-
-        return view('posts.create');
+        $today = date('Y-m-d H:i:s');
+        return view('posts.create', ['today' => $today]);
     }
 
     /**
@@ -41,10 +42,24 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->all());
-        $post->user_id = $request->user()->id;
-
+        $post->lat = $request->lat;
+        $post->lng=$request->lng;
+        $post->photo_1=$request->photo_1;
+        $post->photo_2=$request->photo_2;
+        $post->category=$request->category;
+        $post->memo=$request->memo;
         $file = $request->file('image');
         $post->image = self::createFileName($file);
+
+        if($request->hasFile('photo_1')) {
+            $photoPath1 = $request->file('photo_1')->store('photos');
+            $post->photo_1=$photoPath1;
+        }
+
+        if($request->hasFile('photo_2')) {
+            $photoPath2=$request->file('photo_2')->store('photos');
+            $post->photo_2=$photoPath2;
+        }
 
         // トランザクション開始
         DB::beginTransaction();
@@ -66,6 +81,7 @@ class PostController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
+        return redirect('/posts')->with('success', '新しい発見が登録されました!');
     }
 
     /**
