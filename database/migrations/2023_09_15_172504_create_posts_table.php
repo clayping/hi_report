@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('category');
             $table->string('photo_1');
             $table->string('photo_2');
-            $table->text('memo');
-            $table->string('status');
-            $table->text('admin_comment');
+            $table->text('memo')->nullable();
+            $table->string('status')->nullable();
+            $table->text('admin_comment')->nullable();
             $table->timestamps();
         });
     }

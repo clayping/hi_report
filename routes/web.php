@@ -42,4 +42,5 @@ Route::resource('posts', PostController::class)
     ->except(['create', 'store'])
     ->middleware('auth');
 
+
 require __DIR__ . '/auth.php';
