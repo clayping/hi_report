@@ -22,7 +22,5 @@ class DatabaseSeeder extends Seeder
         // PostSeeder（シーダークラス）の呼び出し
         $this->call(PostSeeder::class);
 
-        $this->call(UserSeeder::class);
-
     }
 }
