@@ -15,8 +15,10 @@
             </div>
 
 
-            <input type="text" id="lat" name="lat">
-            <input type="text" id="lng" name="lng">
+            <label for="latitude">緯度:</label>
+            <input type="text" id="latitude" name="lat"><br>
+            <label for="longitude">経度:</label>
+            <input type="text" id="longitude" name="lng">
 
             <div id="mapid" style="height: 400px; width:600px"></div>
             <script>
@@ -27,13 +29,16 @@
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
                 }).addTo(mymap);
                 var markers = [];
+
+                var latitudeInput = document.getElementById('latitude');
+                var longitudeInput = document.getElementById('longitude');
                 //クリックした場所にマーカーを追加
                 mymap.on('click', function(e) {
-                    var lat = e.latlng.lat;
-                    var lng = e.latlng.lng;
+                    latitudeInput.value = e.latlng.lat;
+                    longitudeInput.value = e.latlng.lng;
 
                     //マーカーを作成し､マップに追加
-                    var marker = L.marker([lat, lng]).addTo(mymap);
+                    var marker = L.marker([latitudeInput.value, longitudeInput.value]).addTo(mymap);
                     markers.push(marker);
 
                     //マーカーがクリックされたときのイベントハンドラ
@@ -44,9 +49,6 @@
                         }); //配列から削除
                     });
 
-                    // //緯度と経度を隠しフィールドに設定
-                    // document.getElementById('latInput').value = lat;
-                    // document.getElementById('lngInput').value = lng;
                 });
             </script>
 
