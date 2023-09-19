@@ -22,8 +22,8 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lat' => 'required|string|max:50',
-            'lng' => 'required|string|max:50',
+            // 'lat' => 'required|numeric',
+            // 'lng' => 'required|numeric',
             'category' => 'required|string|max:2000',
             'photo_1' => 'required|file|image|mimes:jpg,png',
             'photo_2' => 'required|file|image|mimes:jpg,png',
