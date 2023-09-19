@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 // メール機能のための追加
 use Illuminate\Support\Facades\Mail;
+// use Mail;
 use App\Mail\PostCreated;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\SampleNotification;
 use App\Notifications\PostCreatedNotification;
+use Illuminate\Http\Request;
+
+use App\Mail\SendTestMail;
 
 use Carbon\Carbon;
 
@@ -56,6 +61,18 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
+        // $to = [
+        //     [
+        //         'email' => 'mailtestmugi@gmail.com',
+        //         'name' => 'Test',
+        //     ]
+        // ];
+        // $name = 'テスト';
+        // $text = 'これからもよろしくお願いいたします。';
+
+        // Mail::to($to)->send(new PostCreated());
+
+
         // // トランザクション開始
         DB::beginTransaction();
         try {
@@ -79,7 +96,6 @@ class PostController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
         return redirect()->route('posts.show', $post);
-        return redirect('/posts')->with('success', '新しい発見が登録されました!');
     }
 
     /**
@@ -205,5 +221,17 @@ class PostController extends Controller
         Mail::to($user)->send(new PostCreated($newPost));
 
         return redirect('/posts')->with('success', '投稿が作成されました。');
+    }
+//     public function send(){
+//         $to = [
+//             [
+//                 'email' => 'mailtestmugi@gmail.com',
+//                 'name' => 'Test',
+//             ]
+//         ];
+
+// 	Mail::to($to)->send(new PostCreated());
+
+//     }
 }
-}
+
