@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 
 use App\Mail\SendTestMail;
 
+
 use Carbon\Carbon;
 
 class PostController extends Controller
@@ -46,14 +47,15 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
         $post = new Post();
-        $post->discovery_day=$request->discovery_day;
+        $post->discovery_day = $request->discovery_day;
         $post->lat = $request->lat;
-        $post->lng=$request->lng;
-        $post->category=$request->category;
-        $post->memo=$request->memo;
-        $post->status=$request->status;
-        $post->admin_comment=$request->admin_comment;
+        $post->lng = $request->lng;
+        $post->category = $request->category;
+        $post->memo = $request->memo;
+        $post->status = $request->status;
+        $post->admin_comment = $request->admin_comment;
 
         $file1 = $request->file('photo_1');
         $post->photo_1 = date('YmdHis') . '_' . $file1->getClientOriginalName();
@@ -95,8 +97,9 @@ class PostController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return redirect()->route('posts.show', $post);
+        return view('posts.message');
     }
+
 
     /**
      * Display the specified resource.
@@ -221,17 +224,5 @@ class PostController extends Controller
         Mail::to($user)->send(new PostCreated($newPost));
 
         return redirect('/posts')->with('success', '投稿が作成されました。');
-    }
-//     public function send(){
-//         $to = [
-//             [
-//                 'email' => 'mailtestmugi@gmail.com',
-//                 'name' => 'Test',
-//             ]
-//         ];
-
-// 	Mail::to($to)->send(new PostCreated());
-
-//     }
 }
-
+}

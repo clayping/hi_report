@@ -38,10 +38,16 @@ Route::middleware('auth')->group(function () {
 Route::resource('posts', PostController::class)
     ->only(['create', 'store']);
 
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::resource('posts', PostController::class)
     ->except(['create', 'store'])
     ->middleware('auth');
 
-// Route::get('/mail', PostController::class,'send');
 
 require __DIR__ . '/auth.php';
+
+// Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+
+
