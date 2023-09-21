@@ -56,6 +56,15 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
+	$to = [
+        [
+            'email' => 'mailtestmugi@gmail.com',
+            'name' => 'Test',
+        ]
+	];
+
+	Mail::to($to)->send(new PostCreated());
+
         // // トランザクション開始
         DB::beginTransaction();
         try {
@@ -79,7 +88,6 @@ class PostController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
         return redirect()->route('posts.show', $post);
-        return redirect('/posts')->with('success', '新しい発見が登録されました!');
     }
 
     /**
