@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
+    <div class="container lg:w-4/5 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
         <h2 class="text-center text-lg font-bold pt-6 tracking-widest">登録情報編集</h2>
 
         <x-validation-errors :errors="$errors" />
@@ -13,10 +13,11 @@
                     登録No.{{ $post->id }}
                 </label>
 
-            <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
-                <span class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->discovery_day ? 'NEW' : '' }}</span>
-                {{ $post->discovery_day }}
-            </p>
+                <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
+                    <span class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->discovery_day ? 'NEW' : '' }}</span>
+                    {{ $post->discovery_day }}
+                </p>
+            </div>
 
             {{-- 地図挿入 --}}
             <div id="mapid" style="height: 400px; width: 600px"></div>
@@ -30,17 +31,22 @@
                 var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap);
                 
             </script>
+
+            <br>
+            <br>
+
+            <div class="flex">
+            <img src="{{ $post->image_url }}" alt="" class="mb-4 px-4" width="400">
+            <img src="{{ $post->image2_url }}" alt="" class="mb-4 px-4" width="400">
             </div>
 
-            <div>
-            <img src="{{ $post->image_url }}" alt="" class="mb-4">
-            <img src="{{ $post->image2_url }}" alt="" class="mb-4">
-            <h3>投稿者メモ</h3>
-            <p class="text-gray-700 text-base">{!! nl2br(e($post->memo)) !!}</p>
+            <div class="text-xl">
+            <h3>【投稿者メモ】</h3>
+            <p class="text-gray-700 text-lg">{!! nl2br(e($post->memo)) !!}</p>
             </div>
-
+            <br>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="body">
+                <label class="block text-gray-700 text-lg mb-2" for="body">
                     管理者コメント
                 </label>
                 <textarea name="admin_comment" rows="5"
