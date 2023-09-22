@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\SampleNotification;
 use App\Notifications\PostCreatedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Mail\SendTestMail;
 
@@ -63,14 +64,16 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
-	$to = [
-        [
-            'email' => 'mailtestmugi@gmail.com',
-            'name' => 'Test',
-        ]
-	];
+	// $to = [
+    //     [
+    //         'email' => 'mailtestmugi@gmail.com',
+    //         'name' => 'Test',
+    //     ]
+	// ];
 
-	Mail::to($to)->send(new PostCreated());
+	// Mail::to($to)->send(new PostCreated());
+        $post = Post::find(1);
+        Mail::to($post)->send(new PostCreated($post));
 
         // // トランザクション開始
         DB::beginTransaction();
@@ -206,22 +209,20 @@ class PostController extends Controller
         return date('YmdHis') . '_' . $file->getClientOriginalName();
     }
 
-    public function createPost(StorePostRequest $request)
-    {
-        // 投稿を作成するロジックを追加
+    // public function createPost(StorePostRequest $request)
+    // {
 
-        // メールを送信
-        $user = Auth::user(); // 例えば、ログインユーザーを取得
+    //     $user = Auth::user();
 
-        $newPost = new Post();
-        $newPost->title = '新しい投稿のタイトル';
-        $newPost->content = '新しい投稿の内容';
-        $newPost->save();
-        $newPost = Post::find($newPost->id);
-        Mail::to($user)->send(new PostCreated($newPost));
+    //     $newPost = new Post();
+    //     $newPost->title = '新しい投稿のタイトル';
+    //     $newPost->content = '新しい投稿の内容';
+    //     $newPost->save();
+    //     $newPost = Post::find($newPost->id);
+    //     Mail::to($user)->send(new PostCreated($newPost));
 
-        return redirect('/posts')->with('success', '投稿が作成されました。');
-    }
+    //     return redirect('/posts')->with('success', '投稿が作成されました。');
+    // }
 
     public function markers()
     {
