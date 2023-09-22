@@ -26,12 +26,30 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function top()
     {
-        $posts = Post::with('user')->latest()->paginate(4);
-
-        return view('posts.index', compact('posts'));
+        $posts = Post::all();
+        return view('posts.top', ['posts'=>$posts]);
     }
+
+    public function markers()
+    {
+        $posts = Post::all();
+        return view('posts.markers', ['posts'=>$posts]);
+    }
+    
+    public function emergency()
+    {
+        $posts = Post::all();
+        return view('posts.emergency', ['posts'=>$posts]);
+    }
+
+    // public function index()
+    // {
+    //     $posts = Post::with('user')->latest()->paginate(4);
+
+    //     return view('posts.index', compact('posts'));
+    // }
 
     /**
      * Show the form for creating a new resource.
