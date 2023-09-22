@@ -42,10 +42,9 @@ class Post extends Model
         return 'images/posts/' . $this->photo_1;
     }
 
-        public function getImage2PathAttribute()
+    public function getImage2PathAttribute()
     {
         // return 'images/posts/' . $this->image;
         return 'images/posts/' . $this->photo_2;
     }
-
 }
