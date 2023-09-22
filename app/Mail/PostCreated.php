@@ -52,22 +52,8 @@ class PostCreated extends Mailable
     {
         return [];
     }
-    // public function toMail($notifiable)
-    // {
-    //     return (new MailMessage)
-    //         ->line('新しい投稿が作成されました。')
-    //         ->action('投稿を見る', url('/posts/' . $this->post->id))
-    //         ->line('ありがとうございます！');
-    // }
-    public function build()
-    {
-    // return $this->view('emails.test')
-    //             ->from('mailtestmugi@gmail.com','Test')
-    //             ->subject('This is a test mail');
-    return $this->text('emails.test_text')
-                ->from('mailtestmugi@gmail.com','Reffect')
-                ->subject('This is a test mail');
-    }
+
+    
     public function build(){
     return $this->text('emails.test_text')
                 ->view('emails.test')
