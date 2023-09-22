@@ -59,15 +59,7 @@ class PostCreated extends Mailable
     //         ->action('投稿を見る', url('/posts/' . $this->post->id))
     //         ->line('ありがとうございます！');
     // }
-    public function build()
-    {
-    // return $this->view('emails.test')
-    //             ->from('mailtestmugi@gmail.com','Test')
-    //             ->subject('This is a test mail');
-    return $this->text('emails.test_text')
-                ->from('mailtestmugi@gmail.com','Reffect')
-                ->subject('This is a test mail');
-    }
+
     public function build(){
     return $this->text('emails.test_text')
                 ->view('emails.test')

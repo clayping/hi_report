@@ -31,12 +31,6 @@ class PostController extends Controller
         $posts = Post::all();
         return view('posts.top', ['posts'=>$posts]);
     }
-
-    public function markers()
-    {
-        $posts = Post::all();
-        return view('posts.markers', ['posts'=>$posts]);
-    }
     
     public function emergency()
     {
@@ -112,7 +106,9 @@ class PostController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return view('posts.message');
+        return redirect()
+            ->route('top', $post)
+        ->with('notice', '投稿完了しました');
     }
 
 

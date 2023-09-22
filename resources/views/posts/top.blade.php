@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+<x-app-layout>
+    @if (session('notice'))
+        <div class="bg-blue-100 border-blue-500 text-blue-700 border-l-4 p-4 my-2">
+            {{ session('notice') }}
+        </div>
+    @endif
     <a href="{{ route('posts.create') }}">投稿する</a><br>
     <a href="{{ route('markers') }}">対応状況</a><br>
     <a href="{{ route('emergency') }}">緊急時(電話通報)</a>
-</body>
-</html>
+
+</x-app-layout>

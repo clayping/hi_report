@@ -2,7 +2,6 @@
 
     <div class="container max-w-7xl mx-auto px-4 md:px-12 pb-3 mt-3">
         <h2 class="font-bold text-2xl">投稿する</h2>
-        {{-- <form method="POST" action="/discoveries" enctype="multipart/form-data"> --}}
         <form method="POST" action="/posts" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -84,6 +83,8 @@
 
             <input type="hidden" name="status">
             <input type="hidden" name="admin_comment">
+
+
 
             <input type="submit" value="登録"
                 class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

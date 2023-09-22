@@ -15,8 +15,8 @@
     }
     </style>
     <ul class="no-bullet"> --}}
-    <h3>連絡先:&nbsp;平泉町役場<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建設水道課<br>
+    <h3>連絡先 :&nbsp;平泉町役場<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建設水道課<br>
     電話番号:&nbsp;0191-46-5569</h3>
 
 
