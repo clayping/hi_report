@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 // メール機能のための追加
 use Illuminate\Support\Facades\Mail;
+// use Mail;
 use App\Mail\PostCreated;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\SampleNotification;
 use App\Notifications\PostCreatedNotification;
+use Illuminate\Http\Request;
+
+use App\Mail\SendTestMail;
 
 
 use Carbon\Carbon;
@@ -57,6 +62,15 @@ class PostController extends Controller
 
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
+
+	$to = [
+        [
+            'email' => 'mailtestmugi@gmail.com',
+            'name' => 'Test',
+        ]
+	];
+
+	Mail::to($to)->send(new PostCreated());
 
         // // トランザクション開始
         DB::beginTransaction();
