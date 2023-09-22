@@ -68,4 +68,10 @@ class PostCreated extends Mailable
                 ->from('mailtestmugi@gmail.com','Reffect')
                 ->subject('This is a test mail');
     }
+    public function build(){
+    return $this->text('emails.test_text')
+                ->view('emails.test')
+                ->from('mailtestmugi@gmail.com','Reffect')
+                ->subject('This is a test mail');
+    }
 }
