@@ -53,6 +53,7 @@ class PostCreated extends Mailable
         return [];
     }
 
+    
     public function build(){
     return $this->text('emails.test_text')
                 ->view('emails.test')
