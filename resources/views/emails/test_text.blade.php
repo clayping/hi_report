@@ -1,3 +1,3 @@
-This is a test mail
+新たな投稿があります
 
-これは初めてのメールです。
+投稿日時{{ $post->discovery_day }}

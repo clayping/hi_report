@@ -56,8 +56,9 @@ class PostCreated extends Mailable
 
     public function build()
     {
-        return $this->view('emails.test')
-            // ->text('emails.test_text')
+        return $this
+            ->text('emails.test_text')
+            // ->view('emails.test')
             ->from('mailtestmugi@gmail.com', 'Reffect')
             ->subject('This is a test mail')
             ->with(['post'=> $this->post]);
