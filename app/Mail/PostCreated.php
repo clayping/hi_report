@@ -14,13 +14,18 @@ use Illuminate\Notifications\Messages\MailMessage;
 class PostCreated extends Mailable
 {
     use Queueable, SerializesModels;
+    private $post;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+
+    // public function __construct()
+    // {
+    // }
+    public function __construct($post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -29,7 +34,7 @@ class PostCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Post Created',
+            subject: 'ポス太からの通知',
         );
     }
 
@@ -39,7 +44,7 @@ class PostCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.test',
         );
     }
 
@@ -52,11 +57,15 @@ class PostCreated extends Mailable
     {
         return [];
     }
-    public function toMail($notifiable)
+
+
+    public function build()
     {
-        return (new MailMessage)
-            ->line('新しい投稿が作成されました。')
-            // ->action('投稿を見る', url('/posts/' . $this->post->id))
-            ->line('ありがとうございます！');
+        return $this
+            // ->text('emails.test_text')
+            // ->view('emails.test')
+            ->from('foo@example.net', 'ポス太')
+            // ->subject('This is a test mail')
+            ->with(['post' => $this->post]);
     }
 }

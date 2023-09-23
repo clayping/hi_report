@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Storage;
 // メール機能のための追加
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PostCreated;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\PostCreatedNotification;
+// use Illuminate\Support\Facades\Auth;
+// use App\Mail\SampleNotification;
+// use App\Notifications\PostCreatedNotification;
+// use Illuminate\Http\Request;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+
+// use App\Mail\SendTestMail;
 
 
 use Carbon\Carbon;
@@ -21,6 +26,18 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function top()
+    {
+        $posts = Post::all();
+        return view('posts.top', ['posts' => $posts]);
+    }
+
+    public function emergency()
+    {
+        $posts = Post::all();
+        return view('posts.emergency', ['posts' => $posts]);
+    }
+
     public function index()
     {
         $posts = Post::with('user')->latest()->paginate(4);
@@ -58,6 +75,15 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
+        $to = [
+            [
+                'email' => 'mailtestmugi@gmail.com',
+                'name' => 'Test',
+            ]
+        ];
+
+        Mail::to($to)->send(new PostCreated($post));
+
         // // トランザクション開始
         DB::beginTransaction();
         try {
@@ -80,7 +106,9 @@ class PostController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return view('posts.message');
+        return redirect()
+            ->route('top', $post)
+        ->with('notice', '投稿完了しました');
     }
 
 
@@ -192,29 +220,25 @@ class PostController extends Controller
         return date('YmdHis') . '_' . $file->getClientOriginalName();
     }
 
-    public function createPost(StorePostRequest $request)
-    {
-        // 投稿を作成するロジックを追加
+    // public function createPost(StorePostRequest $request)
+    // {
 
-        // メールを送信
-        $user = Auth::user(); // 例えば、ログインユーザーを取得
+    //     $user = Auth::user();
 
-        $newPost = new Post();
-        $newPost->title = '新しい投稿のタイトル';
-        $newPost->content = '新しい投稿の内容';
-        $newPost->save();
-        $newPost = Post::find($newPost->id);
-        Mail::to($user)->send(new PostCreated($newPost));
+    //     $newPost = new Post();
+    //     $newPost->title = '新しい投稿のタイトル';
+    //     $newPost->content = '新しい投稿の内容';
+    //     $newPost->save();
+    //     $newPost = Post::find($newPost->id);
+    //     Mail::to($user)->send(new PostCreated($newPost));
 
-        return redirect('/posts')->with('success', '投稿が作成されました。');
-    }
+    //     return redirect('/posts')->with('success', '投稿が作成されました。');
+    // }
 
     public function markers()
     {
         $posts = Post::all();
 
-        return view('posts.markers', ['posts'=> $posts]);
+        return view('posts.markers', ['posts' => $posts]);
     }
-
-
 }

@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', [PostController::class, 'index'])
     ->name('root');
+
+Route::get('/top', [PostController::class, 'top'])
+    ->name('top');
+
+Route::get('/markers', [PostController::class, 'markers'])
+    ->name('markers');
+
+Route::get('/emergency', [PostController::class, 'emergency'])
+    ->name('emergency');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -44,13 +52,10 @@ Route::resource('posts', PostController::class)
     ->except(['create', 'store'])
     ->middleware('auth');
 
-Route::get('/markers', [PostController::class, 'markers'])
-    ->name('markers');
+// Route::post('/create', [MailSendController::class, 'send']);
 
 
 require __DIR__ . '/auth.php';
-
-// Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
 
 
