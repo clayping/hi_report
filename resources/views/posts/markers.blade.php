@@ -1,8 +1,9 @@
 <x-app-layout>
 
+    <h2 class="text-center text-lg font-bold pt-6 tracking-widest">対応状況一覧マップ</h2>
 
     {{-- 地図挿入 --}}
-    <div id="mapid" style="height: 500px; width: 700px"></div>
+    <div id="mapid" style="height: 500px; width: 700px items-center"></div>
 
     <style>
         .popup-image {
@@ -25,7 +26,7 @@
         
         @foreach ($posts as $post)
             @if($post->status)
-                var popupContent = '<div>{{ $post->status }}</div><br><div class="flex flex-row"><img src="{{ Storage::url('images/posts/' . $post->photo_1) }}" alt="Photo 1" class="popup-image" ><img src="{{ Storage::url('images/posts/' . $post->photo_2) }}" alt="Photo 2" class="popup-image"></div>';
+                var popupContent = '<div style="font-size: 16px;">登録No.{{ $post->id }}   {{ $post->status }}</div><br><div class="flex flex-row"><a href="{{ Storage::url('images/posts/' . $post->photo_1) }}" data-lightbox="group"><img src="{{ Storage::url('images/posts/' . $post->photo_1) }}" alt="Photo 1" class="popup-image" ></a><a href="{{ Storage::url('images/posts/' . $post->photo_2) }}" data-lightbox="group"><img src="{{ Storage::url('images/posts/' . $post->photo_2) }}" alt="Photo 2" class="popup-image"></a></div>';
                 var marker = L.marker([{{ $post->lat }}, {{ $post->lng }}]).addTo(mymap)
                     .bindPopup(popupContent, { maxWidth: 500 });  //ポップアップの最大幅を設定
             @endif
