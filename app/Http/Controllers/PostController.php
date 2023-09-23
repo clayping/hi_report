@@ -106,7 +106,9 @@ class PostController extends Controller
             DB::rollback();
             return back()->withInput()->withErrors($e->getMessage());
         }
-        return view('posts.message');
+        return redirect()
+            ->route('top', $post)
+        ->with('notice', '投稿完了しました');
     }
 
 
