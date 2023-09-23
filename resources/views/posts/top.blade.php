@@ -4,14 +4,19 @@
             {{ session('notice') }}
         </div>
     @endif
-    <img src="{{ asset('images/animal_mogura_kouji2.png') }}" alt="画像の代替テキスト" class="w-64 h-64 mx-auto my-1">
-    <div class="flex flex-col items-center justify-center space-y-8 md:space-y-12 h-screen">
-        <a href="{{ route('posts.create') }}"
-            class="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg">投稿する</a>
-        <a href="{{ route('markers') }}"
-            class="w-64 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg">対応状況</a>
-        <a href="{{ route('emergency') }}"
-            class="w-64 bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg">緊急時(電話通報)</a>
+    <div class="bg-green-200">
+        <div class="text-center mt-8 pb-9">
+            <h1 class="text-3xl font-bold mt-4">Hi-report</h1>
+            <img src="{{ asset('images/animal_mogura_kouji2.png') }}" alt="画像の代替テキスト" class="w-64 h-64 mx-auto my-1">
+            <div class="flex flex-col items-center justify-center space-y-8 md:space-y-12">
+                <a href="{{ route('posts.create') }}"
+                    class="w-72 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-lg text-lg">投稿する</a>
+                <a href="{{ route('markers') }}"
+                    class="w-72 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-lg text-lg">対応状況</a>
+                <a href="{{ route('emergency') }}"
+                    class="w-72 bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-10 rounded-lg text-lg">緊急時(電話通報)</a>
+            </div>
+        </div>
     </div>
     {{-- <style>
         /* 共通のスタイル */
