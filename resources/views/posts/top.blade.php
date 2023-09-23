@@ -6,6 +6,7 @@
     @endif
     <img src="{{ asset('images/animal_mogura_kouji2.png') }}" alt="画像の代替テキスト">
     <style>
+        /* 共通のスタイル */
         .button-link {
             display: inline-block;
             width: 300px; /* 固定幅を指定 */ 
@@ -24,6 +25,8 @@
         .button-link:hover {
             background-color: #117848; /* ホバー時の背景色 */
         }
+        
+        /* 緊急ボタンのスタイル */
         .emergency-button {
             background-color: red;
         }
