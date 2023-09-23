@@ -64,16 +64,18 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
-	// $to = [
-    //     [
-    //         'email' => 'mailtestmugi@gmail.com',
-    //         'name' => 'Test',
-    //     ]
-	// ];
+	$to = [
+        [
+            'email' => 'mailtestmugi@gmail.com',
+            'name' => 'Test',
+        ]
+	];
 
 	// Mail::to($to)->send(new PostCreated());
-        $post = Post::find(1);
-        Mail::to($post)->send(new PostCreated($post));
+
+
+        // $post = Post::find(1);
+        Mail::to($to)->send(new PostCreated($post));
 
         // // トランザクション開始
         DB::beginTransaction();

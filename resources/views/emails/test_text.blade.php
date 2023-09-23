@@ -1,3 +1,2 @@
-新たな投稿があります
-
-投稿日時{{ $post->discovery_day }}
+新たな投稿があります(テキスト)
+{{ $post->discovery_day }}
