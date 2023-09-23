@@ -9,15 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 // メール機能のための追加
 use Illuminate\Support\Facades\Mail;
-// use Mail;
 use App\Mail\PostCreated;
-use Illuminate\Support\Facades\Auth;
-use App\Mail\SampleNotification;
-use App\Notifications\PostCreatedNotification;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Support\Facades\Auth;
+// use App\Mail\SampleNotification;
+// use App\Notifications\PostCreatedNotification;
+// use Illuminate\Http\Request;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\Mail\SendTestMail;
+// use App\Mail\SendTestMail;
 
 
 use Carbon\Carbon;
@@ -30,19 +29,13 @@ class PostController extends Controller
     public function top()
     {
         $posts = Post::all();
-        return view('posts.top', ['posts'=>$posts]);
+        return view('posts.top', ['posts' => $posts]);
     }
 
-    public function markers()
-    {
-        $posts = Post::all();
-        return view('posts.markers', ['posts'=>$posts]);
-    }
-    
     public function emergency()
     {
         $posts = Post::all();
-        return view('posts.emergency', ['posts'=>$posts]);
+        return view('posts.emergency', ['posts' => $posts]);
     }
 
     // public function index()
@@ -82,14 +75,14 @@ class PostController extends Controller
         $file2 = $request->file('photo_2');
         $post->photo_2 = date('YmdHis') . '_' . $file2->getClientOriginalName();
 
-	$to = [
-        [
-            'email' => 'mailtestmugi@gmail.com',
-            'name' => 'Test',
-        ]
-	];
+        $to = [
+            [
+                'email' => 'mailtestmugi@gmail.com',
+                'name' => 'Test',
+            ]
+        ];
 
-	// Mail::to($to)->send(new PostCreated());
+        // Mail::to($to)->send(new PostCreated());
 
 
         // $post = Post::find(1);
@@ -248,8 +241,6 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return view('posts.markers', ['posts'=> $posts]);
+        return view('posts.markers', ['posts' => $posts]);
     }
-
-
 }
