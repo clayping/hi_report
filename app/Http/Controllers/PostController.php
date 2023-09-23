@@ -38,12 +38,12 @@ class PostController extends Controller
         return view('posts.emergency', ['posts' => $posts]);
     }
 
-    // public function index()
-    // {
-    //     $posts = Post::with('user')->latest()->paginate(4);
+    public function index()
+    {
+        $posts = Post::with('user')->latest()->paginate(4);
 
-    //     return view('posts.index', compact('posts'));
-    // }
+        return view('posts.index', compact('posts'));
+    }
 
     /**
      * Show the form for creating a new resource.
