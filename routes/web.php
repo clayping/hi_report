@@ -55,7 +55,6 @@ Route::resource('posts', PostController::class)
 // Route::post('/create', [MailSendController::class, 'send']);
 
 
-
 require __DIR__ . '/auth.php';
 
 // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
