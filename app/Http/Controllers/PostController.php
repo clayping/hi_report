@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Storage;
 // メール機能のための追加
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PostCreated;
-// use Illuminate\Support\Facades\Auth;
-// use App\Mail\SampleNotification;
-// use App\Notifications\PostCreatedNotification;
-// use Illuminate\Http\Request;
-// use Illuminate\Foundation\Auth\User as Authenticatable;
-
-// use App\Mail\SendTestMail;
 
 
 use Carbon\Carbon;
@@ -40,9 +33,32 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')->latest()->paginate(4);
+    // $posts = Post::where(function ($query){
+    //         $query->where('status', '!=', '対応完了')
+    //                 ->orWhereNull('status');
+    // })
+    //             ->with('user')
+    //             ->latest()
+    //             ->paginate(4);
 
-        return view('posts.index', compact('posts'));
+    // $posts = Post::where(function ($query){
+            // $query->where('status', '!=', '対応完了')
+            //         ->orWhereNull('status');
+    // })
+    $posts = Post::whereNull('status')
+                    ->with('user')
+                    ->latest()
+                    ->get();
+
+
+    $posts2 = Post::where('status', '確認中')->with('user')
+                                        ->latest()
+                    ->get();
+    $posts3 = Post::where('status', '対応中')->with('user')
+                        ->latest()
+                    ->get();
+
+        return view('posts.index', compact('posts', 'posts2', 'posts3'));
     }
 
     /**
@@ -78,7 +94,7 @@ class PostController extends Controller
         $to = [
             [
                 'email' => 'mailtestmugi@gmail.com',
-                'name' => 'Test',
+                'name' => '斎藤宏太朗',
             ]
         ];
 
@@ -220,20 +236,6 @@ class PostController extends Controller
         return date('YmdHis') . '_' . $file->getClientOriginalName();
     }
 
-    // public function createPost(StorePostRequest $request)
-    // {
-
-    //     $user = Auth::user();
-
-    //     $newPost = new Post();
-    //     $newPost->title = '新しい投稿のタイトル';
-    //     $newPost->content = '新しい投稿の内容';
-    //     $newPost->save();
-    //     $newPost = Post::find($newPost->id);
-    //     Mail::to($user)->send(new PostCreated($newPost));
-
-    //     return redirect('/posts')->with('success', '投稿が作成されました。');
-    // }
 
     public function markers()
     {
