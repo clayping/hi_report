@@ -82,10 +82,6 @@ class PostController extends Controller
             ]
         ];
 
-        // Mail::to($to)->send(new PostCreated());
-
-
-        // $post = Post::find(1);
         Mail::to($to)->send(new PostCreated($post));
 
         // // トランザクション開始

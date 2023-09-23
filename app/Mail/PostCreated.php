@@ -34,7 +34,7 @@ class PostCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'ポスタからの通知',
+            subject: 'ポス太からの通知',
         );
     }
 
@@ -62,10 +62,10 @@ class PostCreated extends Mailable
     public function build()
     {
         return $this
-            ->text('emails.test_text')
+            // ->text('emails.test_text')
             // ->view('emails.test')
-            ->from('mailtestmugi@gmail.com', 'Reffect')
-            ->subject('This is a test mail')
-            ->with(['post'=> $this->post]);
+            ->from('foo@example.net', 'ポス太')
+            // ->subject('This is a test mail')
+            ->with(['post' => $this->post]);
     }
 }
