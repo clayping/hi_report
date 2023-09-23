@@ -56,12 +56,13 @@
 
         
             <div>
-                <p>対応ステータス<br>
+                <p>【対応ステータス】<br><br>
                     <input type="radio" name="status" value="確認中" {{ $post->status === "確認中" ? 'checked' : '' }}> 確認中
                     <input type="radio" name="status" value="対応中" {{ $post->status === "対応中" ? 'checked' : '' }}> 対応中
                     <input type="radio" name="status" value="対応完了" {{ $post->status === "対応完了" ? 'checked' : '' }}> 対応完了
                 </p>
             </div>
+            <br>
 
 
             <div class="flex flex-row text-center my-4">
