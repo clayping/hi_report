@@ -20,9 +20,6 @@ class PostCreated extends Mailable
      * Create a new message instance.
      */
 
-    // public function __construct()
-    // {
-    // }
     public function __construct($post)
     {
         $this->post = $post;
@@ -35,6 +32,7 @@ class PostCreated extends Mailable
     {
         return new Envelope(
             subject: 'ポス太からの通知',
+            from: 'foo@example.net', 
         );
     }
 
@@ -64,7 +62,7 @@ class PostCreated extends Mailable
         return $this
             // ->text('emails.test_text')
             // ->view('emails.test')
-            ->from('foo@example.net', 'ポス太')
+            // ->from('foo@example.net', 'ポス太')
             // ->subject('This is a test mail')
             ->with(['post' => $this->post]);
     }
