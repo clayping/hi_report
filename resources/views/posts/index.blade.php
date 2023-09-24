@@ -8,7 +8,7 @@
         </ul> --}}
         <div class="pb-8">
             <a href="/markers"
-                onclick="window.open('/markers', '', 'width=950,height=500,scrollbars=yes'); return false;">
+                onclick="window.open('/markers', '', 'width=950,height=700,scrollbars=yes'); return false;">
                 ▶一覧掲載地図
             </a>
         </div>
@@ -16,7 +16,7 @@
             @foreach ($posts as $post)
                 {{-- <article class="w-full px-4 md:w-1/2 text-xl text-gray-800 leading-normal"> --}}
                 <article class="w-full px-4 text-xl text-gray-800 leading-normal">
-                    <div class="py-20">
+                    <div class="py-1">
                         <a href="{{ route('posts.show', $post) }}">
 
                             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
@@ -32,7 +32,7 @@
                                 <h3 class="px-2">種別:{{ $post->category }}</h3>
                                 {{-- <h3>{{ $post->discovery_day }}</h3> --}}
                                 {{-- <h3 class="px-2">{{ $post->status }}</h3> --}}
-                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 50) }}</p>
+                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 80) }}</p>
 
                             </div>
 
@@ -42,13 +42,13 @@
                 </article>
             @endforeach
         </div>
-        <h2>確認中</h2>
+        <h2 class="text-red-200">確認中</h2>
 
         <div class="flex flex-wrap -mx-1 lg:-mx-4 mb-4">
             @foreach ($posts2 as $post)
                 {{-- <article class="w-full px-4 md:w-1/2 text-xl text-gray-800 leading-normal"> --}}
                 <article class="w-full px-4 text-xl text-gray-800 leading-normal">
-                    <div class="py-20">
+                    <div class="py-1">
                         <a href="{{ route('posts.show', $post) }}">
 
                             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
@@ -64,7 +64,7 @@
                                 <h3 class="px-2">種別:{{ $post->category }}</h3>
                                 {{-- <h3>{{ $post->discovery_day }}</h3> --}}
                                 {{-- <h3 class="px-2">{{ $post->status }}</h3> --}}
-                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 50) }}</p>
+                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 80) }}</p>
 
                             </div>
 
@@ -75,12 +75,12 @@
             @endforeach
         </div>
 
-        <h2>対応中</h2>
+        <h2 class="text-blue-100">対応中</h2>
         <div class="flex flex-wrap -mx-1 lg:-mx-4 mb-4">
             @foreach ($posts3 as $post)
                 {{-- <article class="w-full px-4 md:w-1/2 text-xl text-gray-800 leading-normal"> --}}
                 <article class="w-full px-4 text-xl text-gray-800 leading-normal">
-                    <div class="py-20">
+                    <div class="py-1">
                         <a href="{{ route('posts.show', $post) }}">
 
                             <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
@@ -96,7 +96,7 @@
                                 <h3 class="px-2">種別:{{ $post->category }}</h3>
                                 {{-- <h3>{{ $post->discovery_day }}</h3> --}}
                                 {{-- <h3 class="px-2">{{ $post->status }}</h3> --}}
-                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 50) }}</p>
+                                <p class="text-gray-700 text-base">{{ Str::limit($post->memo, 80) }}</p>
 
                             </div>
 
