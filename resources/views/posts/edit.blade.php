@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container lg:w-4/5 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
-        <h2 class="text-center text-lg font-bold pt-6 tracking-widest">登録情報編集</h2>
+        <h2 class="text-center text-xl text-blue-700 font-bold pt-6 tracking-widest">管理者用登録情報編集ページ</h2>
 
         <x-validation-errors :errors="$errors" />
 
@@ -20,7 +20,7 @@
             </div>
 
             {{-- 地図挿入 --}}
-            <div id="mapid" style="height: 400px; width: 600px"></div>
+            <div id="mapid" style="height: 400px; width: 700px"></div>
             <script>
                 var mymap = L.map('mapid').setView([{{ $post->lat }}, {{ $post->lng }}], 17);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -57,7 +57,7 @@
             </div>
 
             <div>
-                <p class="text-lg">【対応ステータス】<br>
+                <p class="text-lg">【対応ステータス】 <p class="text-red-500">※入力すると対応状況一覧マップに公開されます</p><br>
                     <label class="inline-flex items-center mr-6">
                         <input type="radio" name="status" value="確認中" {{ $post->status === "確認中" ? 'checked' : '' }}>
                         <span class="ml-2">確認中</span>
