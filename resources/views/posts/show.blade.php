@@ -1,6 +1,8 @@
 <x-app-layout>
     <div class="container lg:w-4/5 md:w-4/5 w-11/12 mx-auto my-8 px-8 py-4 bg-white shadow-md">
 
+        <h2 class="text-center text-xl text-blue-700 font-bold pt-6 tracking-widest">管理者用詳細確認ページ</h2>
+
         @if (session('notice'))
             <div class="bg-blue-100 border-blue-500 text-blue-700 border-l-4 p-4 my-2">
                 {{ session('notice') }}
@@ -18,7 +20,7 @@
         </article>
 
         {{-- 地図挿入 --}}
-        <div id="mapid" style="height: 400px; width: 600px"></div>
+        <div id="mapid" style="height: 400px; width: 700px"></div>
             <script>
                 var mymap = L.map('mapid').setView([{{ $post->lat }}, {{ $post->lng }}], 17);
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
 
     <h2 class="text-center text-lg font-bold pt-6 tracking-widest">対応状況一覧マップ</h2>
 
@@ -18,7 +18,7 @@
     </style>
 
     <script>
-        var mymap = L.map('mapid').setView([38.9871, 141.1141], 13);
+        var mymap = L.map('mapid').setView([38.9871, 141.1141], 14);
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
