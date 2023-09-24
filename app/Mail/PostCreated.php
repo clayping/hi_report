@@ -31,7 +31,7 @@ class PostCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'ポス太からの通知',
+            subject: 'Hi-レポートからの通知',
             from: 'foo@example.net', 
         );
     }
