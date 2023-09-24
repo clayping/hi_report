@@ -9,7 +9,7 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="title">
+                <label class="block text-gray-700 text-lg mb-2" for="title">
                     登録No.{{ $post->id }}
                 </label>
 
@@ -36,34 +36,43 @@
             <br>
 
             <div class="flex">
-            <img src="{{ $post->image_url }}" alt="" class="mb-4 px-4" width="400">
-            <img src="{{ $post->image2_url }}" alt="" class="mb-4 px-4" width="400">
+            <a href="{{ $post->image_url }}" data-lightbox="group"><img src="{{ $post->image_url }}" alt="" class="mb-4 px-4" width="350"></a>
+            <a href="{{ $post->image2_url }}" data-lightbox="group"><img src="{{ $post->image2_url }}" alt="" class="mb-4 px-4" width="350"></a>
             </div>
 
-            <div class="text-xl">
-            <h3>【投稿者メモ】</h3>
-            <p class="text-gray-700 text-lg">{!! nl2br(e($post->memo)) !!}</p>
+            <div class="text-lg">
+                <h3>【投稿者メモ】</h3>
+                <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; border-radius: 5px;">
+                    <p class="text-gray-700 text-lg">{!! nl2br(e($post->memo)) !!}</p>
+                </div>
             </div>
             <br>
             <div class="mb-4">
                 <label class="block text-gray-700 text-lg mb-2" for="body">
-                    管理者コメント
+                    【管理者コメント】
                 </label>
                 <textarea name="admin_comment" rows="5"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
+                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-lg w-full py-2 px-3"
                     placeholder="対応状況など">{{ old('admin_comment', $post->admin_comment) }}</textarea>
             </div>
 
-        
             <div>
-                <p>【対応ステータス】<br><br>
-                    <input type="radio" name="status" value="確認中" {{ $post->status === "確認中" ? 'checked' : '' }}> 確認中
-                    <input type="radio" name="status" value="対応中" {{ $post->status === "対応中" ? 'checked' : '' }}> 対応中
-                    <input type="radio" name="status" value="対応完了" {{ $post->status === "対応完了" ? 'checked' : '' }}> 対応完了
+                <p class="text-lg">【対応ステータス】<br>
+                    <label class="inline-flex items-center mr-6">
+                        <input type="radio" name="status" value="確認中" {{ $post->status === "確認中" ? 'checked' : '' }}>
+                        <span class="ml-2">確認中</span>
+                    </label>
+                    <label class="inline-flex items-center mr-6">
+                        <input type="radio" name="status" value="対応中" {{ $post->status === "対応中" ? 'checked' : '' }}>
+                        <span class="ml-2">対応中</span>
+                    </label>
+                    <label class="inline-flex items-center mr-6">
+                        <input type="radio" name="status" value="対応完了" {{ $post->status === "対応完了" ? 'checked' : '' }}>
+                        <span class="ml-2">対応完了</span>
+                    </label>
                 </p>
             </div>
             <br>
-
 
             <div class="flex flex-row text-center my-4">
                 <input type="submit" value="更新"
